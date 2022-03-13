@@ -6,12 +6,12 @@ const { uploadErrors } = require("../utils/errors.utils");
 
 module.exports.uploadProfil = async (req, res) => {
   try {
-    // if (
-    //   req.file.detectedMimeType != "image/jpg" &&
-    //   req.file.detectedMimeType != "image/png" &&
-    //   req.file.detectedMimeType != "image/jpeg"
-    // )
-    //   throw Error("invalid file");
+    if (
+      req.file.detectedMimeType != "image/jpg" &&
+      req.file.detectedMimeType != "image/png" &&
+      req.file.detectedMimeType != "image/jpeg"
+    )
+      throw Error("invalid file");
 
     if (req.file.size > 500000) throw Error("max size");
   } catch (err) {
@@ -32,10 +32,9 @@ module.exports.uploadProfil = async (req, res) => {
       req.body.userId,
       { $set: { picture: "./upload/profil/" + fileName } },
       { new: true, upsert: true, setDefaultsOnInsert: true }
-
-        .then((docs) => res.send(docs))
-        .catch((err) => res.status(500).send({ message: err }))
-    );
+    )
+      .then((docs) => res.send(docs))
+      .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {
     return res.status(500).send({ message: err });
   }
