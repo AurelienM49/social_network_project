@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema(
   {
     posterId: {
       type: String,
-      required: true,
+      required: true
     },
     message: {
       type: String,
@@ -24,11 +24,11 @@ const PostSchema = new mongoose.Schema(
     comments: {
       type: [
         {
-          commenterId: String,
+          commenterId:String,
           commenterPseudo: String,
           text: String,
           timestamp: Number,
-        },
+        }
       ],
       required: true,
     },
@@ -38,4 +38,4 @@ const PostSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("post", PostSchema);
+module.exports = mongoose.model('post', PostSchema);
